@@ -1,0 +1,20 @@
+{
+    "name": "rafael/subway-routes-api",
+    "description": "api to subway",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Rafael\\SubwayRoutesApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rafaels549",
+            "email": "rafalesantoscostat@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^4.0",
+        "doctrine/orm": "^2.19"
+    }
+}
