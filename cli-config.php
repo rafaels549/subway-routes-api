@@ -13,16 +13,16 @@ use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\Migrations\DependencyFactory;
 use Dotenv\Dotenv;
 
-// Carrega as variáveis de ambiente
+
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// Registrar o tipo UUID no DBAL
+
 if (!Type::hasType('uuid')) {
     Type::addType('uuid', UuidType::class);
 }
 
-$config = new PhpFile('migrations.php'); // Ou use um dos carregadores de Configuration\*
+$config = new PhpFile('migrations.php'); 
 $params = [
     'host'     => $_ENV['DB_HOST'],
     'user'     => $_ENV['DB_USER'],
