@@ -32,7 +32,7 @@ $dbParams = [
 $config = Setup::createAttributeMetadataConfiguration($paths, $isDevMode);
 $entityManager = EntityManager::create($dbParams, $config);
 
-// Criar as roles
+
 $roles = [
     'Admin' => 'Role with all permissions',
     'Passenger' => 'Standard user role with access to ticketing and schedules',

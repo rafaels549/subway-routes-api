@@ -39,4 +39,3 @@ class Database
         return $this->entityManager;
     }
 }
-?>

@@ -13,10 +13,8 @@ use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\Migrations\DependencyFactory;
 use Dotenv\Dotenv;
 
-
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-
 
 if (!Type::hasType('uuid')) {
     Type::addType('uuid', UuidType::class);
