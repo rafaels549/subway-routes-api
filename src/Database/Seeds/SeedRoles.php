@@ -9,14 +9,12 @@ use Dotenv\Dotenv;
 use Ramsey\Uuid\Doctrine\UuidType;
 use Doctrine\DBAL\Types\Type;
 
-
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../../..');
 $dotenv->load();
 
 if (!Type::hasType('uuid')) {
     Type::addType('uuid', UuidType::class);
 }
-
 
 $paths = [__DIR__ . '/../Entity'];
 $isDevMode = true;
@@ -31,7 +29,6 @@ $dbParams = [
 
 $config = Setup::createAttributeMetadataConfiguration($paths, $isDevMode);
 $entityManager = EntityManager::create($dbParams, $config);
-
 
 $roles = [
     'Admin' => 'Role with all permissions',
