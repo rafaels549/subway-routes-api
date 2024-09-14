@@ -6,4 +6,4 @@ This PR adds the seed and migration configuration for the role feature.
 
 More information:
 
-•⁠  ⁠[**Trello Project**](trello_url)
+•⁠ ⁠[**Trello Project**](trello_url)
