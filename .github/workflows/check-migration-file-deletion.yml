@@ -1,0 +1,31 @@
+name: Check for Deleted Migration Files
+
+on:
+  pull_request:
+    branches:
+      - develop  
+      - main     
+
+jobs:
+  check-migrations:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Fetch all branches
+      run: git fetch origin
+
+    - name: Check for deleted migration files
+      run: |
+        # Define o diretório onde os arquivos de migração estão
+        MIGRATION_DIR="src/Database/Migrations"
+        
+        # Check if any migration file was deleted in the pull request comparing develop and main
+        if git diff --name-status origin/main...origin/develop | grep -E "^D\s+$MIGRATION_DIR"; then
+          echo "A migration file has been deleted. This is not allowed."
+          exit 1
+        else
+          echo "No migration files deleted."
+        fi
