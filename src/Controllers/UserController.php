@@ -60,8 +60,7 @@ return function (App $app) {
             $entityManager->flush();
     
             $response->getBody()->write(json_encode([
-                'message' => 'Usuário criado com sucesso',
-                'id' => (string) $user->getId()
+                'message' => 'Usuário criado com sucesso'
             ]));
     
             return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
