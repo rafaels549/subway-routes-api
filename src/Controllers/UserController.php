@@ -7,29 +7,16 @@ use Rafael\SubwayRoutesApi\Database\Database;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use Ramsey\Uuid\Uuid;
+use Respect\Validation\Validator as v;
+use Rafael\SubwayRoutesApi\Middleware\UserValidationMiddleware;
 
 return function (App $app) {
     $database = new Database();
     $entityManager = $database->getEntityManager();
 
     $app->group('/user', function (RouteCollectorProxy $group) use ($entityManager) {
-
         $group->post('/create', function (Request $request, Response $response) use ($entityManager) {
-            $body = $request->getBody()->getContents();
-            $data = json_decode($body, true);
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                $response->getBody()->write(json_encode(['error' => 'Invalid JSON format']));
-                return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
-            }
-
-            $requiredFields = ['username', 'password', 'role_id', 'contact', 'address', 'date_of_birth', 'gender', 'nationality', 'languages'];
-            foreach ($requiredFields as $field) {
-                if (!isset($data[$field])) {
-                    $response->getBody()->write(json_encode(['error' => "Missing required field: $field"]));
-                    return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
-                }
-            }
+            $data = json_decode($request->getBody()->getContents(), true);
 
             $roleId = Uuid::fromString($data['role_id']);
             $user = new User(
@@ -54,7 +41,6 @@ return function (App $app) {
 
             $response->getBody()->write(json_encode(['message' => 'User created successfully']));
             return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
-        });
-
+        })->add(new UserValidationMiddleware());
     });
 };
