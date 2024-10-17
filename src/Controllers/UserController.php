@@ -36,11 +36,20 @@ return function (App $app) {
                 $data['languages']
             );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+        try{
+                $entityManager->persist($user);
+                $entityManager->flush();
+                    
+                $response->getBody()->write(json_encode(['message' => 'User created successfully']));
+                return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
 
-            $response->getBody()->write(json_encode(['message' => 'User created successfully']));
-            return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
+        }catch(\Exception $e){
+
+                $response->getBody()->write(json_encode(['message' => 'Failed to create user', 'details' => $e->getMessage()]));
+                return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+                
+        }
+
         })->add(new UserValidationMiddleware());
     });
 };

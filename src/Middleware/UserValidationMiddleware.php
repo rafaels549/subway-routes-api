@@ -10,11 +10,9 @@ class UserValidationMiddleware {
     public function __invoke(Request $request, RequestHandlerInterface $handler): Response {
         $data = json_decode($request->getBody()->getContents(), true);
         $response = new \Slim\Psr7\Response();
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
+       if (json_last_error() !== JSON_ERROR_NONE) {
             return $this->errorResponse($response, 'Invalid JSON', 400);
         }
-
         $validation = v::arrayType()
             ->key('username', v::stringType()->notEmpty())
             ->key('password', v::stringType()->length(8, null))
@@ -25,7 +23,6 @@ class UserValidationMiddleware {
             ->key('gender', v::stringType())
             ->key('nationality', v::stringType())
             ->key('languages', v::stringType());
-
         try {
             $validation->assert($data);
             $this->validatePassword($data['password']);
@@ -35,7 +32,6 @@ class UserValidationMiddleware {
         } catch (\Exception $e) {
             return $this->errorResponse($response, $e->getMessage(), 400);
         }
-
         $request = $request->withParsedBody($data);
         return $handler->handle($request);
     }
@@ -43,16 +39,16 @@ class UserValidationMiddleware {
     private function validatePassword($password) {
         $messages = [];
         if (!preg_match('/[A-Z]/', $password)) {
-            $messages[] = 'A senha deve conter pelo menos uma letra maiúscula.';
+            $messages[] = 'The password must contain at least one uppercase letter.';
         }
         if (!preg_match('/[a-z]/', $password)) {
-            $messages[] = 'A senha deve conter pelo menos uma letra minúscula.';
+            $messages[] = 'The password must contain at least one lowercase letter.';
         }
         if (!preg_match('/[0-9]/', $password)) {
-            $messages[] = 'A senha deve conter pelo menos um número.';
+            $messages[] = 'The password must contain at least one number.';
         }
         if (!preg_match('/[\W]/', $password)) {
-            $messages[] = 'A senha deve conter pelo menos um caractere especial.';
+            $messages[] = 'The password must contain at least one special character.';
         }
         if (count($messages) > 0) {
             throw new \Exception(implode(', ', $messages));
