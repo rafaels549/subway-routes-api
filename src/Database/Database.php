@@ -19,15 +19,12 @@ class Database
         if (!Type::hasType('uuid')) {
             Type::addType('uuid', UuidType::class);
         }
-
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: [__DIR__ . '/../Entity'], 
             isDevMode: true,
             cache: null
         );
-
         $config->addCustomNumericFunction('UUID', 'Ramsey\Uuid\Doctrine\UuidGenerator');
-
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
         $dotenv->load();
        
@@ -41,7 +38,6 @@ class Database
             'charset' => $_ENV['DB_CHARSET'],
             'sslmode' => 'disable'
         ];
-
         $connection = DriverManager::getConnection($connectionParams, $config);
         $this->entityManager = new EntityManager($connection, $config);
     }

@@ -11,11 +11,9 @@ class UserValidationMiddleware {
     public function __invoke(Request $request, RequestHandlerInterface $handler): Response {
         $data = json_decode($request->getBody()->getContents(), true);
         $response = new \Slim\Psr7\Response();
-
         if (json_last_error() !== JSON_ERROR_NONE) {
             return $this->errorResponse($response, ['Invalid JSON'], 400);
         }
-
         $validation = v::arrayType()
             ->key('username', v::stringType()->notEmpty()->setName('username'))
             ->key('password', v::stringType()->setName('password')) 
@@ -42,7 +40,6 @@ class UserValidationMiddleware {
         } catch (ValidationException $e) {
             $allErrors = array_merge($allErrors, $e->getMessages());
         }
-
         if (isset($data['password'])) {
             $passwordMessages = $this->validatePassword($data['password']);
             if (!empty($passwordMessages)) {
@@ -54,7 +51,6 @@ class UserValidationMiddleware {
                 }
             }
         }
-
         if (!empty($allErrors) || !empty($generalErrors)) {
 
             $allErrors['general'] = $generalErrors; 

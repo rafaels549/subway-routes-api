@@ -13,7 +13,6 @@ use Rafael\SubwayRoutesApi\Middleware\UserValidationMiddleware;
 return function (App $app) {
     $database = new Database();
     $entityManager = $database->getEntityManager();
-
     $app->group('/user', function (RouteCollectorProxy $group) use ($entityManager) {
         $group->post('/create', function (Request $request, Response $response) use ($entityManager) {
             $data = json_decode($request->getBody()->getContents(), true);
@@ -44,12 +43,9 @@ return function (App $app) {
                 return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
 
         }catch(\Exception $e){
-
                 $response->getBody()->write(json_encode(['message' => 'Failed to create user', 'details' => $e->getMessage()]));
                 return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
-                
         }
-
-        })->add(new UserValidationMiddleware());
+    })->add(new UserValidationMiddleware());
     });
 };
