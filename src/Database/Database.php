@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Dotenv\Dotenv;
 use Doctrine\DBAL\Types\Type;
-use Doctrine\ORM\Tools\Setup;
 use Ramsey\Uuid\Doctrine\UuidType;
 
 class Database
@@ -15,7 +14,6 @@ class Database
 
     public function __construct()
     {
-
         if (!Type::hasType('uuid')) {
             Type::addType('uuid', UuidType::class);
         }
@@ -28,7 +26,7 @@ class Database
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
         $dotenv->load();
        
-       $connectionParams = [
+        $connectionParams = [
             'driver' => $_ENV['DB_DRIVER'],
             'host' => $_ENV['DB_HOST'],
             'port' => $_ENV['DB_PORT'],

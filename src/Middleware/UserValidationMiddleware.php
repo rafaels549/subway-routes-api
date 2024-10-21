@@ -86,20 +86,17 @@ class UserValidationMiddleware {
 
     private function errorResponse(Response $response, array $errors, $status): Response {
         $formattedErrors = $this->formatErrors($errors);
-
         $response->getBody()->write(json_encode([
             'message' => 'There were validation errors',
             'data' => [
                 'errors' => $formattedErrors
             ]
         ]));
-
         return $response->withStatus($status)->withHeader('Content-Type', 'application/json');
     }
 
     private function formatErrors(array $errors): array {
         $formattedErrors = [];
-
         foreach ($errors as $field => $messages) {
             if (is_array($messages)) {
                 $formattedErrors[$field] = $messages; 
@@ -107,7 +104,6 @@ class UserValidationMiddleware {
                 $formattedErrors[$field] = $messages;
             }
         }
-
         return $formattedErrors;
     }
 }
