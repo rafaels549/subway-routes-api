@@ -10,8 +10,7 @@ return [
     ],
 
     'migrations_paths' => [
-        'Migrations' => '/src/Database/Migrations',
-
+        'SubwayRoutesApi\Database\Migrations' => 'src/Database/Migrations',
     ],
 
     'all_or_nothing' => true,
