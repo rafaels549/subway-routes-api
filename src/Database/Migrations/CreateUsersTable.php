@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20241010183159 extends AbstractMigration
+final class CreateUsersTable extends AbstractMigration
 {
     public function getDescription(): string
     {

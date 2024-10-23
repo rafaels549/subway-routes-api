@@ -7,7 +7,7 @@ namespace Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20240830010719 extends AbstractMigration
+final class CreateRolesTable extends AbstractMigration
 {
     public function getDescription(): string
     {
