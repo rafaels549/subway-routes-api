@@ -6,8 +6,8 @@ use Rafael\SubwayRoutesApi\Database\Database;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use Ramsey\Uuid\Uuid;
-use Respect\Validation\Validator as v;
 use Rafael\SubwayRoutesApi\Middleware\UserValidationMiddleware;
+use Rafael\SubwayRoutesApi\DTO\UserDTO;
 
 return function (App $app) {
     $database = new Database();
@@ -42,5 +42,25 @@ return function (App $app) {
                 return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
             }
         })->add(new UserValidationMiddleware());
+        $group->get('/all', function (Request $request, Response $response) use ($entityManager) {
+            $queryParams = $request->getQueryParams();
+            $skip = isset($queryParams['skip']) ? (int) $queryParams['skip'] : 0;
+            $limit = isset($queryParams['limit']) ? (int) $queryParams['limit'] : 10;
+            $name = isset($queryParams['name']) ? $queryParams['name'] : '';
+            $qb = $entityManager->getRepository(User::class)->createQueryBuilder('u')
+                ->setFirstResult($skip)
+                ->setMaxResults($limit);
+        
+            if (!empty($name)) {
+                $qb->where($qb->expr()->like('u.username', ':name'))
+                   ->setParameter('name', '%' . $name . '%');
+            }
+        
+            $users = $qb->getQuery()->getResult();
+            $userData = array_map(fn($user) => (new UserDTO($user))->toArray(), $users);
+        
+            $response->getBody()->write(json_encode($userData));
+            return $response->withHeader('Content-Type', 'application/json');
+        });
     });
 };

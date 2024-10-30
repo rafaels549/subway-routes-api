@@ -38,7 +38,7 @@ class UserValidationMiddleware {
         try {
             $validation->assert($data);
         } catch (ValidationException $e) {
-            $allErrors = array_merge($allErrors, $e->getMessages());
+            $allErrors = array_merge($allErrors, $e->getMessage());
         }
         if (isset($data['password'])) {
             $passwordMessages = $this->validatePassword($data['password']);

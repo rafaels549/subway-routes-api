@@ -38,7 +38,7 @@ $connectionParams = [
 $connection = DriverManager::getConnection($connectionParams, $ORMConfig);
 
 // Create the EntityManager
-$entityManager = EntityManager::create($connection, $ORMConfig);
+$entityManager = new EntityManager($connection, $ORMConfig);
 
 // Load migration configuration from migrations.php
 $config = new PhpFile('migrations.php'); 
