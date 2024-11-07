@@ -1,6 +1,6 @@
 <?php
 
-namespace Rafael\SubwayRoutesApi\Public;
+namespace Api\SubwayRoutes\Public;
 
 require __DIR__ . '/../vendor/autoload.php';
 

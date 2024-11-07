@@ -1,6 +1,6 @@
 <?php
 
-namespace Rafael\SubwayRoutesApi\Database\Entity;
+namespace Api\SubwayRoutes\Database\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;

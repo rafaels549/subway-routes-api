@@ -2,11 +2,11 @@
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Rafael\SubwayRoutesApi\Database\Entity\Manufacturer;
-use Rafael\SubwayRoutesApi\Database\Database;
+use Api\SubwayRoutes\Database\Entity\Manufacturer;
+use Api\SubwayRoutes\Database\Database;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
-use Rafael\SubwayRoutesApi\Middleware\ManufacturerValidationMiddleware;
+use Api\SubwayRoutes\Middleware\ManufacturerValidationMiddleware;
 
 return function (App $app) {
     $database = new Database();

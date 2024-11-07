@@ -1,5 +1,5 @@
 <?php
-namespace Rafael\SubwayRoutesApi\DTO;
+namespace Api\SubwayRoutes\DTO;
 
 class UserDTO
 {

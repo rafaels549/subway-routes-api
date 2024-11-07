@@ -1,13 +1,13 @@
 <?php
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Rafael\SubwayRoutesApi\Database\Entity\User;
-use Rafael\SubwayRoutesApi\Database\Database;
+use Api\SubwayRoutes\Database\Entity\User;
+use Api\SubwayRoutes\Database\Database;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use Ramsey\Uuid\Uuid;
-use Rafael\SubwayRoutesApi\Middleware\UserValidationMiddleware;
-use Rafael\SubwayRoutesApi\DTO\UserDTO;
+use Api\SubwayRoutes\Middleware\UserValidationMiddleware;
+use Api\SubwayRoutes\DTO\UserDTO;
 
 return function (App $app) {
     $database = new Database();

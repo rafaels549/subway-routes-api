@@ -4,7 +4,7 @@ require __DIR__ . '/../../../vendor/autoload.php';
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
-use Rafael\SubwayRoutesApi\Entity\Role;
+use Api\SubwayRoutes\Entity\Role;
 use Dotenv\Dotenv;
 use Ramsey\Uuid\Doctrine\UuidType;
 use Doctrine\DBAL\Types\Type;

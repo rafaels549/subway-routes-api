@@ -2,12 +2,12 @@
     "name": "rafael/slim-api",
     "autoload": {
         "psr-4": {
-            "Rafael\\SubwayRoutesApi\\": "src/"
+            "Api\\SubwayRoutes\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "rafaels549",
+            "name": "SubwayRouter",
             "email": "rafalesantoscostat@gmail.com"
         }
     ],
