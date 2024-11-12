@@ -1,5 +1,5 @@
 <?php
-namespace Api\SubWayRoutes\Database;
+namespace Api\SubwayRoutes\Database;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
