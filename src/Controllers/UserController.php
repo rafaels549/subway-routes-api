@@ -166,7 +166,7 @@ return function (App $app) {
             $responseData = [
                 'message' => empty($userData) ? 'No users found.' : 'Users found.',
                 'data' => $userData,
-                'totalNumber' => $totalUsers
+                'total' => $totalUsers
             ];
         
             $response->getBody()->write(json_encode($responseData));
