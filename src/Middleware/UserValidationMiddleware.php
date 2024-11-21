@@ -1,5 +1,5 @@
 <?php
-namespace Rafael\SubWayRoutesApi\Middleware;
+namespace Api\SubWayRoutes\Middleware;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -38,7 +38,7 @@ class UserValidationMiddleware {
         try {
             $validation->assert($data);
         } catch (ValidationException $e) {
-            $allErrors = array_merge($allErrors, $e->getMessages());
+            $allErrors = array_merge($allErrors, $e->getMessage());
         }
         if (isset($data['password'])) {
             $passwordMessages = $this->validatePassword($data['password']);

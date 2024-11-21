@@ -1,5 +1,5 @@
 <?php
-namespace Rafael\SubWayRoutesApi\Database;
+namespace Api\SubwayRoutes\Database;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
